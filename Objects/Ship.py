@@ -23,11 +23,14 @@ class Ship(RoomObject):
         """
         Respond to keypress up and down
         """
-        
         if key[pygame.K_w]:
             self.y -= 10
         elif key[pygame.K_s]:
             self.y += 10
+        elif key[pygame.K_d]:
+            self.x += 10
+        elif key[pygame.K_a]:
+            self.x -= 10
 
     def keep_in_room(self):
         #traps ship inside the box >:)
