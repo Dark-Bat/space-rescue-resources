@@ -23,7 +23,19 @@ class Ship(RoomObject):
         """
         Respond to keypress up and down
         """
-        if key[pygame.K_w]:
+        if key[pygame.K_a] and key[pygame.K_s]:
+            self.y += 7
+            self.x -= 7
+        elif key[pygame.K_a] and key[pygame.K_w]:
+            self.y -= 7
+            self.x -= 7
+        elif key[pygame.K_d] and key[pygame.K_s]:
+            self.y += 7
+            self.x += 7
+        elif key[pygame.K_d] and key[pygame.K_s]:
+            self.y += 7
+            self.x -= 7
+        elif key[pygame.K_w]:
             self.y -= 10
         elif key[pygame.K_s]:
             self.y += 10
@@ -38,6 +50,10 @@ class Ship(RoomObject):
             self.y = 0
         elif self.y + self.height > Globals.SCREEN_HEIGHT:
             self.y = Globals.SCREEN_HEIGHT - self.height
+        elif self.x + self.height > Globals.SCREEN_WIDTH:
+            self.x = Globals.SCREEN_WIDTH - self.height
+        elif self.x < 0:
+            self.x = 0
     
     def step(self):
         #what happens to the boat every tick

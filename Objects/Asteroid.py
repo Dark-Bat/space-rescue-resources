@@ -20,6 +20,11 @@ class Asteroid(RoomObject):
         elif self.y > Globals.SCREEN_HEIGHT - self.height:
             self.y = Globals.SCREEN_HEIGHT - self.height +1
             self.y_speed *= -1
+        elif self.x > Globals.SCREEN_WIDTH- self.width:
+            self.x = Globals.SCREEN_WIDTH - self.width +1
+        elif self.x < 0:
+            self.y = 1
+            self.y *= -1
     
     def step(self):
         self.keep_in_room()
