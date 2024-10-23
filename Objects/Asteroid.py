@@ -12,6 +12,8 @@ class Asteroid(RoomObject):
         #set travel direction
         angle = random.randint(135,225)
         self.set_direction(angle,10)
+        #register events
+        self.register_collision_object("Ship")
     
     def keep_in_room(self):
         if self.y < 0:
@@ -35,3 +37,8 @@ class Asteroid(RoomObject):
     def step(self):
         self.keep_in_room()
         self.outside_of_room()
+
+    def handle_collision(self, other, other_type):
+        #Handles collision events
+        if other_type == "Ship":
+            self.room.running = False
