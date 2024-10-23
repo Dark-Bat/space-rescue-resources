@@ -16,15 +16,22 @@ class Asteroid(RoomObject):
     def keep_in_room(self):
         if self.y < 0:
             self.y = 1
-            self.y *=-1
+            self.y_speed *= -1
         elif self.y > Globals.SCREEN_HEIGHT - self.height:
             self.y = Globals.SCREEN_HEIGHT - self.height +1
             self.y_speed *= -1
         elif self.x > Globals.SCREEN_WIDTH- self.width:
             self.x = Globals.SCREEN_WIDTH - self.width +1
+            self.x_speed *= -1
         elif self.x < 0:
-            self.y = 1
-            self.y *= -1
+            self.x = 1
+            self.x_speed *= -1
+    
+    def outside_of_room(self):
+    #kills the asteroid if it leaves
+        if self.x +self.width < 0 or self.y + self.height < 0:
+            self.room.delete_object(self)
     
     def step(self):
         self.keep_in_room()
+        self.outside_of_room()

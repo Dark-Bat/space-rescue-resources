@@ -23,18 +23,18 @@ class Ship(RoomObject):
         """
         Respond to keypress up and down
         """
-        if key[pygame.K_a] and key[pygame.K_s]:
-            self.y += 7
-            self.x -= 7
-        elif key[pygame.K_a] and key[pygame.K_w]:
+        if key[pygame.K_w] and key[pygame.K_a]:
             self.y -= 7
             self.x -= 7
-        elif key[pygame.K_d] and key[pygame.K_s]:
-            self.y += 7
+        elif key[pygame.K_w] and key[pygame.K_d]:
+            self.y -= 7
             self.x += 7
-        elif key[pygame.K_d] and key[pygame.K_s]:
+        elif key[pygame.K_s] and key[pygame.K_a]:
             self.y += 7
             self.x -= 7
+        elif key[pygame.K_s] and key[pygame.K_d]:
+            self.y += 7
+            self.x += 7
         elif key[pygame.K_w]:
             self.y -= 10
         elif key[pygame.K_s]:
