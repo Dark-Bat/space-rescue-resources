@@ -11,6 +11,7 @@ class Astronaut(RoomObject):
         self.set_direction(180,5)
 
         self.register_collision_object("Ship")
+        self.register_collision_object("Asteroid")
 
     def step(self):
         self.outside_of_room()
@@ -19,6 +20,8 @@ class Astronaut(RoomObject):
         if other_type == "Ship":
             self.room.delete_object(self)
             self.room.score.update_score(50)
+        if other_type == "Asteroid":
+            self.room.delete_object(self)
 
     def outside_of_room(self):
         if self.x + self.width < -1:
