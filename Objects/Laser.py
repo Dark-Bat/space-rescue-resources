@@ -1,5 +1,7 @@
 from GameFrame import RoomObject, Globals
+from Objects.Powerups import Powerups
 from Objects.Hud import Score
+import random
 
 class Laser(RoomObject):
     #Creates lasers
@@ -18,6 +20,7 @@ class Laser(RoomObject):
         if self.x > Globals.SCREEN_WIDTH:
             self.room.delete_object(self)
 
+
     def step(self):
         self.outside_of_room()
     
@@ -28,9 +31,16 @@ class Laser(RoomObject):
             self.room.asteroid_shot.play()
             self.room.delete_object(other)
             self.room.score.update_score(5)
+            self.spawn_shield()
         elif other_type == "Astronaut":
             self.room.astronaut_shot.play()
             self.room.delete_object(other)
             self.room.score.update_score(-10)
         self.room.delete_object(self)
+
+    def spawn_shield(self):
+        shield_spawn_chance = random.randint(1,20)
+        if shield_spawn_chance == 20:
+            shield = Powerups(self.room, self.x, self.y)
+            self.room.add_room_object(shield)
         
