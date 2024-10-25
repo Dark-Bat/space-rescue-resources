@@ -73,5 +73,7 @@ class Ship(RoomObject):
             self.room.add_room_object(new_laser)
             self.can_shoot = False
             self.set_timer(10,self.reset_shot)
+            self.room.shoot_laser.play()
+
     def reset_shot(self):
         self.can_shoot = True

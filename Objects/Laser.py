@@ -25,9 +25,11 @@ class Laser(RoomObject):
     def handle_collision(self,other, other_type):
         #handles laser collisions
         if other_type == "Asteroid":
+            self.room.asteroid_shot.play()
             self.room.delete_object(other)
             self.room.score.update_score(5)
         elif other_type == "Astronaut":
+            self.room.astronaut_shot.play()
             self.room.delete_object(other)
             self.room.score.update_score(-10)
         
