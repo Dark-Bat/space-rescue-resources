@@ -22,10 +22,18 @@ class Shield(RoomObject):
             Globals.active_shield = True
             self.room.delete_object(self)
             print("Shield aquired")
-            self.set_timer(500, self.deactivate_shield)
+            self.set_timer(750, self.deactivate_shield)
 
     def deactivate_shield(self):
         Globals.active_shield = False
+        print("Shield Deactivated")
+
+class RepairKit(RoomObject):
+    def __init__(self, room, x, y):
+        RoomObject.__init__(self,room, x, y)
+        image = self.load_image("Repair_kit.png")
+        self.set_image(image, 42, 42)
+
 
 
     

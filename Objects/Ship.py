@@ -64,6 +64,7 @@ class Ship(RoomObject):
     def step(self):
         #what happens to the boat every tick
         self.keep_in_room()
+        self.update_sprite()
 
     def shoot_laser(self):
         if self.can_shoot:
@@ -78,3 +79,11 @@ class Ship(RoomObject):
 
     def reset_shot(self):
         self.can_shoot = True
+
+    def update_sprite(self):
+        if Globals.active_shield == True:
+            image = self.load_image("Shield.png")
+        else:
+            image = self.load_image("Ship.png")
+        self.set_image(image,100,100)
+        
