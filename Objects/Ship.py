@@ -19,6 +19,7 @@ class Ship(RoomObject):
         
         # register events
         self.handle_key_events = True
+        self.handle_collision = True
 
         self.can_shoot = True
         

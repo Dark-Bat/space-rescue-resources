@@ -1,4 +1,5 @@
 from GameFrame import RoomObject, Globals
+from Powerups import Shield
 import random
 
 class Asteroid(RoomObject):
@@ -39,11 +40,11 @@ class Asteroid(RoomObject):
         self.outside_of_room()
 
     def handle_collision(self, other, other_type):
-        #Handles collision events
         if other_type == "Ship":
             self.room.delete_object(self)
             self.room.asteroid_collision.play()
-            Globals.LIVES -= 1
+            if not Globals.active_shield:
+                Globals.LIVES -= 1
             if Globals.LIVES > 0:
                 self.room.lives.update_image()
             else:

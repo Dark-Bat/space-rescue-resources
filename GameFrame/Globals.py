@@ -1,3 +1,4 @@
+import pygame
 
 class Globals:
 
@@ -31,6 +32,8 @@ class Globals:
     # - Change variable to True to exit the program - #
     exiting = False
 
+    
+
 
 # ############################################################# #
 # ###### User Defined Global Variables below this line ######## #
@@ -38,3 +41,4 @@ class Globals:
 
     total_count = 0
     destroyed_count = 0
+    active_shield = False

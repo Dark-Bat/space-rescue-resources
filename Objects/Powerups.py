@@ -1,22 +1,31 @@
 from GameFrame import RoomObject, Globals
-
-class Powerups(RoomObject):
+import random
+import pygame
+class Shield(RoomObject):
 
     def __init__(self, room, x, y):
         RoomObject.__init__(self, room, x, y)
-        #create image
-        image = self.load_image("Sheild.png")
-        self.set_image(image,46, 50)
-        #add movement
-        self.set_direction(180,20)
-        #handle events
+        image = self.load_image("Shield.png")
+        self.set_image(image,50,50)
+        self.set_direction(180,5)
         self.register_collision_object("Ship")
-    
+
+    def step(self):
+        self.outside_of_room()
+
     def outside_of_room(self):
         if self.x < 0:
             self.room.delete_object(self)
 
-    def step(self):
-        self.outside_of_room()
+    def handle_collision(self, other, other_type):
+        if other_type == "Ship":
+            Globals.active_shield = True
+            self.room.delete_object(self)
+            print("Shield aquired")
+            self.set_timer(500, self.deactivate_shield)
+
+    def deactivate_shield(self):
+        Globals.active_shield = False
+
 
     
