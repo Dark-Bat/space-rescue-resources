@@ -31,10 +31,10 @@ class Laser(RoomObject):
             self.room.asteroid_shot.play()
             self.room.delete_object(other)
             self.room.score.update_score(5)
-            if random.random() < 0.05:
+            if random.randint(1,100) < 50//Globals.difficulty:
                 shield = Shield(self.room, self.x, self.y)
                 self.room.add_room_object(shield)
-            if random.random() <0.05:
+            if random.randint(1,100) < 50//Globals.difficulty:
                 repair_kit = RepairKit(self.room, self.x, self.y)
                 self.room.add_room_object(repair_kit)
         elif other_type == "Astronaut":

@@ -14,7 +14,7 @@ class Zork(RoomObject):
         #set movement
         self.y_speed = random.choice([-10,10])
         #start asteroid timer
-        asteroid_spawn_time = random.randint(1,2)
+        asteroid_spawn_time = random.randint(1,150)
         self.set_timer(asteroid_spawn_time, self.spawn_asteroid)
         #start astronaut timer
         astronaut_spawn_time = random.randint(30, 200)

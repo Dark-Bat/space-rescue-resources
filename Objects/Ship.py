@@ -82,7 +82,7 @@ class Ship(RoomObject):
 
     def update_sprite(self):
         if Globals.active_shield == True:
-            image = self.load_image("Shield.png")
+            image = self.load_image("Rescue_0.png")
         else:
             image = self.load_image("Ship.png")
         self.set_image(image,100,100)

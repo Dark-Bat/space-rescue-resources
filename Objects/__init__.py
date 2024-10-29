@@ -6,3 +6,4 @@ from Objects.Laser import Laser
 from Objects.Astronaut import Astronaut
 from Objects.Hud import Score, Lives
 from Objects.Powerups import Shield, RepairKit
+from Objects.button import Button

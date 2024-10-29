@@ -22,7 +22,7 @@ class Shield(RoomObject):
         if other_type == "Ship":
             Globals.active_shield = True
             self.room.delete_object(self)
-            self.set_timer(5000, self.deactivate_shield)
+            self.set_timer(50, self.deactivate_shield)
 
     def deactivate_shield(self):
         Globals.active_shield = False
