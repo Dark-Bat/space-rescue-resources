@@ -12,7 +12,7 @@ class Asteroid(RoomObject):
         self.set_image(image,50,49)
         #set travel direction
         angle = random.randint(135,225)
-        self.set_direction(angle,10)
+        self.set_direction(angle, 7*Globals.difficulty)
         #register events
         self.register_collision_object("Ship")
     
