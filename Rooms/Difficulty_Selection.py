@@ -1,5 +1,6 @@
 from GameFrame import Level, Globals
 from Objects.button import Button
+
 import pygame
 
 class Difficulty_Selection(Level):
@@ -9,15 +10,17 @@ class Difficulty_Selection(Level):
 
         self.handle_mouse_events = True
 
-        self.easy_button = Button(self, 0, 0, "Shield.png", Globals.SCREEN_WIDTH//3, Globals.SCREEN_HEIGHT, self.easy)
+        self.easy_button = Button(self, 0, 0, "Diff_menu/easy_mode.png", Globals.SCREEN_WIDTH//3, Globals.SCREEN_HEIGHT, self.easy)
         self.add_room_object(self.easy_button)
 
-        self.medium_button = Button(self, Globals.SCREEN_WIDTH//3, 0, "Shield.png", Globals.SCREEN_WIDTH//3, Globals.SCREEN_HEIGHT, self.medium)
+
+        self.medium_button = Button(self, Globals.SCREEN_WIDTH//3, 0, "Diff_menu/medium_mode.png", Globals.SCREEN_WIDTH//3, Globals.SCREEN_HEIGHT, self.medium)
         self.add_room_object(self.medium_button)
+        
 
-        self.hard_button = Button(self, Globals.SCREEN_WIDTH//3*2, 0, "Shield.png", Globals.SCREEN_WIDTH//3, Globals.SCREEN_HEIGHT, self.hard)
+        self.hard_button = Button(self, Globals.SCREEN_WIDTH//3*2, 0, "Diff_menu/hard_mode.png", Globals.SCREEN_WIDTH//3, Globals.SCREEN_HEIGHT, self.hard)
         self.add_room_object(self.hard_button)
-
+        
     def easy(self):
         print("easy mode selected")
         Globals.difficulty = 1
@@ -32,6 +35,7 @@ class Difficulty_Selection(Level):
         print("hard mode selected")
         Globals.difficulty = 3
         self.running = False
+
 
 
 
