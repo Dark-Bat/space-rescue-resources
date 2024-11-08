@@ -1,4 +1,5 @@
-from GameFrame import RoomObject
+from GameFrame import RoomObject, Globals
+from Hud import AstroText,AstroCollection
 
 class Astronaut(RoomObject):
 
@@ -21,6 +22,12 @@ class Astronaut(RoomObject):
             self.room.delete_object(self)
             self.room.astronaut_saved.play()
             self.room.score.update_score(50)
+            Globals.astro_count += 1
+            print(Globals.astro_count)
+            self.room.AstroText.update_astrotext()
+            if Globals.astro_count == Globals.threshold:
+                self.room.running = False
+
         if other_type == "Asteroid":
             self.room.delete_object(self)
 

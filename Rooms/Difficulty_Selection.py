@@ -24,17 +24,21 @@ class Difficulty_Selection(Level):
     def easy(self):
         print("easy mode selected")
         Globals.difficulty = 1
+        Globals.threshold = 5
         self.running = False
 
     def medium(self):
         print("Medium mode selected")
         Globals.difficulty = 2
+        Globals.threshold = 10
         self.running = False
 
     def hard(self):
         print("hard mode selected")
         Globals.difficulty = 3
+        Globals.threshold = 15
         self.running = False
+
 
 
 

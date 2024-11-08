@@ -1,7 +1,7 @@
 from GameFrame import Level, Globals
 from Objects.Ship import Ship
 from Objects.Zork import Zork
-from Objects.Hud import Score, Lives
+from Objects.Hud import Score, Lives, AstroCollection, AstroText
 
 class GamePlay(Level):
     def __init__(self, screen, joysticks):
@@ -21,6 +21,12 @@ class GamePlay(Level):
         self.add_room_object(self.score)
         self.lives = Lives(self, Globals.SCREEN_WIDTH - 150, 20)
         self.add_room_object(self.lives)
+        self.AstroCollection = AstroCollection(self, 0, Globals.SCREEN_HEIGHT-100)
+        self.add_room_object(self.AstroCollection)
+        self.AstroText = AstroText(self,100,Globals.SCREEN_HEIGHT-100)
+        self.add_room_object(self.AstroText)
+        print(Globals.threshold)
+
 
         #Load sound files
         self.shoot_laser = self.load_sound("Laser_shot.ogg")
@@ -28,3 +34,8 @@ class GamePlay(Level):
         self.astronaut_saved = self.load_sound("Astronaut_saved.ogg")
         self.asteroid_collision = self.load_sound("Ship_damage.ogg")
         self.astronaut_shot = self.load_sound("Astronaut_hit.ogg")
+
+
+    
+
+        

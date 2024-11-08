@@ -17,7 +17,7 @@ class Globals:
     window_name = 'Space Rescue'
 
     # - Set the order of the rooms - #
-    levels = ["WelcomeScreen", "Difficulty_Selection", "GamePlay"]
+    levels = ["WelcomeScreen", "Difficulty_Selection", "GamePlay", "End_Room"]
 
     # - Set the starting level - #
     start_level = 0
@@ -43,3 +43,5 @@ class Globals:
     destroyed_count = 0
     active_shield = False
     difficulty = 0
+    astro_count = 0
+    threshold = 0
