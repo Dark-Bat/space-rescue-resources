@@ -25,6 +25,7 @@ class Astronaut(RoomObject):
             Globals.astro_count += 1
             print(Globals.astro_count)
             self.room.AstroText.update_astrotext()
+            #win condition
             if Globals.astro_count == Globals.threshold:
                 self.room.running = False
 
@@ -34,3 +35,6 @@ class Astronaut(RoomObject):
     def outside_of_room(self):
         if self.x + self.width < -1:
             self.room.delete_object(self)
+        #Getting position of player for attractor functions, put here for less clutter
+        Globals.x_astro = self.x
+        Globals.y_astro = self.y

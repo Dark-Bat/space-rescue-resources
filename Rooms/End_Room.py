@@ -15,10 +15,7 @@ class End_Room(Level):
             self.add_room_object(Victory(self, 240, 200))
         else:
             self.add_room_object(Failure(self, 240, 200))
-        
-        #load sounds
-        self.bg_music = self.load_sound("Music.mp3")
 
-        #Play background music
-        self.bg_music.play(loops=1)
-        self.bg_music.set_volume(0.1)
+        Globals.astro_count = 0
+        Globals.SCORE = 0
+        Globals.active_shield = False

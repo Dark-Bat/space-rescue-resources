@@ -45,3 +45,12 @@ class Globals:
     difficulty = 0
     astro_count = 0
     threshold = 0
+
+
+    x_player = 0
+    y_player = 0
+    x_astro = 0
+    y_astro = 0
+    x_dif = 0
+    y_dif = 0
+    new_astronaut_angle = 0

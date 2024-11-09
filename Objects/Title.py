@@ -33,7 +33,6 @@ class Victory(RoomObject):
         
         # register for key events
         self.handle_key_events = True 
-
         
     def key_pressed(self, key):
         """

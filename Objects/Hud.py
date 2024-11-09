@@ -40,7 +40,7 @@ class AstroCollection(RoomObject):
         self.set_image(image,100,100)
 
     def end_game(self):
-        self.room.rnu
+        self.room.running = False
 
 class AstroText(TextObject):
     def __init__(self, room, x: int, y: int, text=f"{Globals.astro_count}/{Globals.threshold}"):

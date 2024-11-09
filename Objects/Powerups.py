@@ -49,6 +49,29 @@ class RepairKit(RoomObject):
                 print (Globals.LIVES)
             self.room.delete_object(self)
 
+class ExtraHeart(RoomObject):
+    def __init__(self, room, x, y):
+        RoomObject.__init__(self,room, x, y)
+        image = self.load_image("Lives_frames/Lives_1.png")
+        self.set_image(image, 25,25)
+        self.set_direction(180,20)
+        self.register_collision_object("Ship")
+
+    def step(self):
+        self.outside_of_room()
+
+    def outside_of_room(self):
+        if self.x < 0:
+            self.room.delete_object(self)
+    def handle_collision(self, other, other_type):
+        if other_type == "Ship":
+            if Globals.LIVES <6:
+                Globals.LIVES += 1
+                self.room.lives.update_image()
+                print (Globals.LIVES)
+            self.room.delete_object(self)
+
+
 
 
     

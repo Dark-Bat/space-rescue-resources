@@ -1,6 +1,8 @@
 from GameFrame import RoomObject, Globals
 from Objects.Laser import Laser
+from Objects.Astronaut import Astronaut
 import pygame
+import math
 
 class Ship(RoomObject):
     """
@@ -20,33 +22,47 @@ class Ship(RoomObject):
         # register events
         self.handle_key_events = True
         self.handle_collision = True
+        self.ship_type = ""
+        
 
         self.can_shoot = True
+        self.movement_buff = 1
         
     def key_pressed(self, key):
         """
         Respond to keypress up and down
         """
+        
+        if Globals.active_shield == True:
+            self.movement_buff = 2.5
+        else:
+            self.movement_buff = 1
+
         if key[pygame.K_w] and key[pygame.K_a]:
-            self.y -= 7
-            self.x -= 7
+            self.y -= 7*self.movement_buff
+            self.x -= 7*self.movement_buff
         elif key[pygame.K_w] and key[pygame.K_d]:
-            self.y -= 7
-            self.x += 7
+            self.y -= 7*self.movement_buff
+            self.x += 7*self.movement_buff
         elif key[pygame.K_s] and key[pygame.K_a]:
-            self.y += 7
-            self.x -= 7
+            self.y += 7*self.movement_buff
+            self.x -= 7*self.movement_buff
         elif key[pygame.K_s] and key[pygame.K_d]:
-            self.y += 7
-            self.x += 7
+            self.y += 7*self.movement_buff
+            self.x += 7*self.movement_buff
         elif key[pygame.K_w]:
-            self.y -= 10
+            self.y -= 10*self.movement_buff
         elif key[pygame.K_s]:
-            self.y += 10
+            self.y += 10*self.movement_buff
         elif key[pygame.K_d]:
-            self.x += 10
+            self.x += 10*self.movement_buff
         elif key[pygame.K_a]:
-            self.x -= 10
+            self.x -= 10*self.movement_buff
+        if key[pygame.K_LCTRL or pygame.K_RCTRL]:
+            if self.ship_type == "Attractor":
+                self.Attractor_Buff()
+            elif self.ship_type == "Swerver":
+                self.Swerver_Buff()
         if key[pygame.K_SPACE]:
             self.shoot_laser()
 
@@ -60,6 +76,9 @@ class Ship(RoomObject):
             self.x = Globals.SCREEN_WIDTH - self.height
         elif self.x < 0:
             self.x = 0
+
+        Globals.x_player = self.x
+        Globals.y_player = self.y
     
     def step(self):
         #what happens to the boat every tick
@@ -86,4 +105,23 @@ class Ship(RoomObject):
         else:
             image = self.load_image("Ship.png")
         self.set_image(image,100,100)
-        
+
+    def Swerver_Buff(self):
+        self.movement_buff = 1.25
+        Globals.active_shield = False
+
+    def Attractor_Buff(self):
+        #Checks what quadrant the astronaut is in relative to the ship, and finds the distance between them
+        if Globals.x_player < Globals.x_astro:
+            Globals.x_dif = Globals.x_astro - Globals.x_player
+            print(Globals.x_dif)
+        elif Globals.x_player < Globals.x_astro:
+            Globals.x_dif = Globals.x_player - Globals.x_astro 
+            print(Globals.x_dif)
+        if Globals.y_player < Globals.y_astro:
+            Globals.y_dif = Globals.y_astro - Globals.y_player
+            print(Globals.y_dif)
+        elif Globals.y_player < Globals.y_astro:
+            Globals.y_dif = Globals.y_player - Globals.y_astro
+            print(Globals.y_dif)
+        Globals.new_astronaut_angle = math.atan2(int(Globals.y_dif,Globals.x_dif))*180/math.pi

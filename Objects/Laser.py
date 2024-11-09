@@ -37,6 +37,10 @@ class Laser(RoomObject):
             if random.randint(1,100) < 50//Globals.difficulty:
                 repair_kit = RepairKit(self.room, self.x, self.y)
                 self.room.add_room_object(repair_kit)
+            if random.randint(1,100) < 50//Globals.difficulty:
+                heart = Shield(self.room, self.x, self.y)
+                self.room.add_room_object(heart)
+
         elif other_type == "Astronaut":
             self.room.astronaut_shot.play()
             self.room.delete_object(other)
