@@ -15,10 +15,12 @@ class Ship(RoomObject):
         """
         RoomObject.__init__(self, room, x, y)
         
-        # set image
+        # sets image depending on which ship type you chose
         if Globals.ship_type == "Swerver":
+            #Gains a mild speed buff while holding shift, but cant shield
             image = self.load_image("Rescue_invinc_frames/Rescue_0.png")
         else:
+            #Can move astronauts towards player, but sacrifices movement speed
             image = self.load_image("Attractor_invinc_frames\Rescue_0.png")
         self.set_image(image,100,100)
         
@@ -26,7 +28,7 @@ class Ship(RoomObject):
         self.handle_key_events = True
         self.handle_collision = True
         
-
+        #Neccesary values for later
         self.can_shoot = True
         self.movement_buff = 1
         self.player_coords = (0,0)
@@ -45,6 +47,7 @@ class Ship(RoomObject):
         else:
             self.movement_buff = 1 
 
+        #Simple 8 direction movement code, accounting for pythag theorum and movement increasing buffs
         if key[pygame.K_w] and key[pygame.K_a]:
             self.y -= 7*self.movement_buff
             self.x -= 7*self.movement_buff
@@ -66,16 +69,19 @@ class Ship(RoomObject):
         elif key[pygame.K_a]:
             self.x -= 10*self.movement_buff
         if key[pygame.K_LSHIFT or pygame.K_RSHIFT]:
+            #Reacts to shift key press
             if Globals.ship_type == "Attractor":
-                self.Attractor_Buff()
+                #Sets a global boolean, that is used in other classes for functions and here for speed changes.
                 Globals.Attractor_Buff_Active = True
             elif Globals.ship_type == "Swerver":
-                self.Swerver_Buff()
                 Globals.Swerver_Buff_Active = True
+                Globals.active_shield = False
         else:
+            #Turns off the buffs if the player doesn't do anything
             Globals.Attractor_Buff_Active = False
             Globals.Swerver_Buff_Active = False
         if key[pygame.K_SPACE]:
+            #Shoots a laser
             self.shoot_laser()
         
 
@@ -100,7 +106,7 @@ class Ship(RoomObject):
 
     def shoot_laser(self):
         if self.can_shoot:
-            #Shoots laser from ship
+            #function that shoots laser from ship
             new_laser = Laser(self.room, 
                             self.x + self.width, 
                             self.y + self.height/2 - 4)
@@ -110,9 +116,11 @@ class Ship(RoomObject):
             self.room.shoot_laser.play()
 
     def reset_shot(self):
+        #Neccesary for the set_timer() function
         self.can_shoot = True
 
     def update_sprite(self):
+        #Changes the sprite of the boat during the game depending on what buffs are active, and what ship type was chosen.
         if Globals.active_shield == True and Globals.ship_type == "Swerver":
             image = self.load_image("Rescue_invinc_frames/Rescue_0.png")
         elif Globals.active_shield == True and Globals.ship_type == "Attractor":
@@ -123,23 +131,3 @@ class Ship(RoomObject):
             image = ("Images\Attractor_frames\Rescue_0.png")
         self.set_image(image,100,100)
 
-    def Swerver_Buff(self):
-        Globals.active_shield = False
-        print("Swerver buff")
-
-    def Attractor_Buff(self):
-        #Checks what quadrant the astronaut is in relative to the ship, and finds the distance between them
-        Globals.Attractor_Buff_Active = True
-        print("Attractor buff")
-
-class Attractor(RoomObject):
-    def __init__(self, room, x, y):
-        RoomObject.__init__(self, room, x, y)
-        image = "Attractor_frames/rescue_0"
-        self.set_image(image,100,100)
-
-class Swerver(RoomObject):
-    def __init__(self, room, x, y):
-        RoomObject.__init__(self, room, x, y)
-        image = "Ship.png"
-        self.set_image(image,100,100)

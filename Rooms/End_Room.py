@@ -4,6 +4,7 @@ from Objects.Title import Title
 import pygame
 
 class End_Room(Level):
+    #The victory screen or loss screen depending on what score you got in the game
     def __init__(self, screen, joysticks):
         Level.__init__(self, screen, joysticks)
         

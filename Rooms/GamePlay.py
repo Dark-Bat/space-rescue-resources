@@ -1,9 +1,11 @@
 from GameFrame import Level, Globals
 from Objects.Ship import Ship
 from Objects.Zork import Zork
-from Objects.Hud import Score, Lives, AstroCollection, AstroText
+from Objects.Hud import Score, Lives, AstroText
+from Objects.button import Image
 
 class GamePlay(Level):
+    #The place where the thing happens
     def __init__(self, screen, joysticks):
         Level.__init__(self, screen, joysticks)
         
@@ -22,11 +24,10 @@ class GamePlay(Level):
         self.add_room_object(self.score)
         self.lives = Lives(self, Globals.SCREEN_WIDTH - 150, 20)
         self.add_room_object(self.lives)
-        self.AstroCollection = AstroCollection(self, 0, Globals.SCREEN_HEIGHT-100)
+        self.AstroCollection = Image(self, 0, Globals.SCREEN_HEIGHT-100, "AstroCollection.png", 100, 100)
         self.add_room_object(self.AstroCollection)
-        self.AstroText = AstroText(self,100,Globals.SCREEN_HEIGHT-100)
+        self.AstroText = AstroText(self,150,Globals.SCREEN_HEIGHT-100)
         self.add_room_object(self.AstroText)
-        print(Globals.threshold)
 
 
         #Load sound files

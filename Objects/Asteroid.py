@@ -17,6 +17,7 @@ class Asteroid(RoomObject):
         self.register_collision_object("Ship")
     
     def keep_in_room(self):
+        #Code that allows the asteroid to bounce between the walls
         if self.y < 0:
             self.y = 1
             self.y_speed *= -1
@@ -31,15 +32,17 @@ class Asteroid(RoomObject):
             self.x_speed *= -1
     
     def outside_of_room(self):
-    #kills the asteroid if it leaves
+    #kills the asteroid if it leaves, for efficiency
         if self.x +self.width < 0 or self.y + self.height < 0:
             self.room.delete_object(self)
     
     def step(self):
+        #Functions the code runs every game tick
         self.keep_in_room()
         self.outside_of_room()
 
     def handle_collision(self, other, other_type):
+        #Manages the lives of the ship, and decides what happens on collision with the ship
         if other_type == "Ship":
             self.room.delete_object(self)
             if Globals.active_shield == False:
