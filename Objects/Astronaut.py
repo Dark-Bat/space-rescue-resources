@@ -1,5 +1,6 @@
 from GameFrame import RoomObject, Globals
 from Hud import AstroText,AstroCollection
+import math
 
 class Astronaut(RoomObject):
 
@@ -13,9 +14,13 @@ class Astronaut(RoomObject):
 
         self.register_collision_object("Ship")
         self.register_collision_object("Asteroid")
-
+        
+        self.refernce_x = 1
+        self.reference_y = 1
+        self.new_angle = 0
     def step(self):
         self.outside_of_room()
+
 
     def handle_collision(self, other, other_type):
         if other_type == "Ship":
@@ -38,3 +43,13 @@ class Astronaut(RoomObject):
         #Getting position of player for attractor functions, put here for less clutter
         Globals.x_astro = self.x
         Globals.y_astro = self.y
+        if Globals.Attractor_Buff_Active == True:
+            self.Pathfind_player()
+    
+    def Pathfind_player(self):
+        ship_x = self.room.ship.x
+        ship_y = self.room.ship.y
+        dif_x = ship_x - self.x
+        dif_y = ship_y - self.y
+        self.new_angle = (math.atan2(dif_y, dif_x) * 180 / math.pi) % 360
+        self.set_direction(self.new_angle, 5)

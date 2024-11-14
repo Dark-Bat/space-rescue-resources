@@ -11,7 +11,8 @@ class GamePlay(Level):
         self.set_background_image("Background.png")
         
         # add objects
-        self.add_room_object(Ship(self, 25, 50))
+        self.ship = Ship(self, 25, 50)
+        self.add_room_object(self.ship)
         self.add_room_object(Zork(self,1120,50))
 
         #add HUD

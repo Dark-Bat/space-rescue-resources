@@ -16,27 +16,34 @@ class Ship(RoomObject):
         RoomObject.__init__(self, room, x, y)
         
         # set image
-        image = self.load_image("Ship.png")
+        if Globals.ship_type == "Swerver":
+            image = self.load_image("Rescue_invinc_frames/Rescue_0.png")
+        else:
+            image = self.load_image("Attractor_invinc_frames\Rescue_0.png")
         self.set_image(image,100,100)
         
         # register events
         self.handle_key_events = True
         self.handle_collision = True
-        self.ship_type = ""
         
 
         self.can_shoot = True
         self.movement_buff = 1
+        self.player_coords = (0,0)
         
     def key_pressed(self, key):
         """
         Respond to keypress up and down
         """
-        
+        #If shield is active, increase speed, and if either of the buffs are active act accordingly
         if Globals.active_shield == True:
             self.movement_buff = 2.5
+        elif Globals.Swerver_Buff_Active == True:
+            self.movement_buff = 1.5
+        elif Globals.Attractor_Buff_Active == True:
+            self.movement_buff = 0.1
         else:
-            self.movement_buff = 1
+            self.movement_buff = 1 
 
         if key[pygame.K_w] and key[pygame.K_a]:
             self.y -= 7*self.movement_buff
@@ -58,13 +65,19 @@ class Ship(RoomObject):
             self.x += 10*self.movement_buff
         elif key[pygame.K_a]:
             self.x -= 10*self.movement_buff
-        if key[pygame.K_LCTRL or pygame.K_RCTRL]:
-            if self.ship_type == "Attractor":
+        if key[pygame.K_LSHIFT or pygame.K_RSHIFT]:
+            if Globals.ship_type == "Attractor":
                 self.Attractor_Buff()
-            elif self.ship_type == "Swerver":
+                Globals.Attractor_Buff_Active = True
+            elif Globals.ship_type == "Swerver":
                 self.Swerver_Buff()
+                Globals.Swerver_Buff_Active = True
+        else:
+            Globals.Attractor_Buff_Active = False
+            Globals.Swerver_Buff_Active = False
         if key[pygame.K_SPACE]:
             self.shoot_laser()
+        
 
     def keep_in_room(self):
         #traps ship inside the box >:)
@@ -100,28 +113,33 @@ class Ship(RoomObject):
         self.can_shoot = True
 
     def update_sprite(self):
-        if Globals.active_shield == True:
+        if Globals.active_shield == True and Globals.ship_type == "Swerver":
             image = self.load_image("Rescue_invinc_frames/Rescue_0.png")
-        else:
+        elif Globals.active_shield == True and Globals.ship_type == "Attractor":
+            image = self.load_image("Attractor_invinc_frames\Rescue_0.png")
+        elif Globals.ship_type == "Swerver":
             image = self.load_image("Ship.png")
+        else:
+            image = ("Images\Attractor_frames\Rescue_0.png")
         self.set_image(image,100,100)
 
     def Swerver_Buff(self):
-        self.movement_buff = 1.25
         Globals.active_shield = False
+        print("Swerver buff")
 
     def Attractor_Buff(self):
         #Checks what quadrant the astronaut is in relative to the ship, and finds the distance between them
-        if Globals.x_player < Globals.x_astro:
-            Globals.x_dif = Globals.x_astro - Globals.x_player
-            print(Globals.x_dif)
-        elif Globals.x_player < Globals.x_astro:
-            Globals.x_dif = Globals.x_player - Globals.x_astro 
-            print(Globals.x_dif)
-        if Globals.y_player < Globals.y_astro:
-            Globals.y_dif = Globals.y_astro - Globals.y_player
-            print(Globals.y_dif)
-        elif Globals.y_player < Globals.y_astro:
-            Globals.y_dif = Globals.y_player - Globals.y_astro
-            print(Globals.y_dif)
-        Globals.new_astronaut_angle = math.atan2(int(Globals.y_dif,Globals.x_dif))*180/math.pi
+        Globals.Attractor_Buff_Active = True
+        print("Attractor buff")
+
+class Attractor(RoomObject):
+    def __init__(self, room, x, y):
+        RoomObject.__init__(self, room, x, y)
+        image = "Attractor_frames/rescue_0"
+        self.set_image(image,100,100)
+
+class Swerver(RoomObject):
+    def __init__(self, room, x, y):
+        RoomObject.__init__(self, room, x, y)
+        image = "Ship.png"
+        self.set_image(image,100,100)
