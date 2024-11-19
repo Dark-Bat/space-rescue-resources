@@ -36,8 +36,8 @@ class Lives(RoomObject):
 
 class AstroText(TextObject):
     #A seperate class for the text on the bottom of the gameplay room
-    def __init__(self, room, x: int, y: int, text=f"{Globals.astro_count}/{Globals.threshold}"):
-        TextObject.__init__(self, room, x, y, text)
+    def __init__(self, room, x: int, y: int):
+        TextObject.__init__(self, room, x, y, text=str(f"{Globals.astro_count}/{Globals.threshold}"))
         
         #set values
         self.size = 40
@@ -45,6 +45,7 @@ class AstroText(TextObject):
         self.colour = (255,255,255)
         self.bold = False
         self.update_text()
+        self.text = str(f"{Globals.astro_count}/{Globals.threshold}")
 
     def update_astrotext(self):
         #Changes the display depending on neccesary collection score and how many collected for victory

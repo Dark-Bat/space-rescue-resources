@@ -10,7 +10,7 @@ class Difficulty_Selection(Level):
 
         self.handle_mouse_events = True
 
-        #Creates three buttons that give a different difficulty depending on which one is clicked, uses the button
+        #Creates three buttons that give a different difficulty depending on which one is clicked, uses the button.py file to easily do it. 
         self.easy_button = Button(self, 0, 0, "Diff_menu/easy_mode.png", Globals.SCREEN_WIDTH//3, Globals.SCREEN_HEIGHT, self.easy)
         self.add_room_object(self.easy_button)
 
@@ -23,6 +23,7 @@ class Difficulty_Selection(Level):
         self.add_room_object(self.hard_button)
         
     def easy(self):
+        #the functions that run on differnt button click
         print("easy mode selected")
         Globals.difficulty = 1
         Globals.threshold = 5

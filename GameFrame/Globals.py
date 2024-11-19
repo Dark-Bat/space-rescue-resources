@@ -44,8 +44,8 @@ class Globals:
     active_shield = False
     difficulty = 0
     astro_count = 0
-    threshold = 0
-    ship_type = ""
+    threshold = 5
+    ship_type = ""  
     Swerver_Buff_Active = False
     Attractor_Buff_Active = False
 

@@ -17,6 +17,7 @@ class GamePlay(Level):
         self.add_room_object(self.ship)
         self.add_room_object(Zork(self,1120,50))
 
+        Globals.threshold = 5*Globals.difficulty
         #add HUD
         self.score = Score(self,
                            Globals.SCREEN_WIDTH/2 - 20, 20,
@@ -28,6 +29,7 @@ class GamePlay(Level):
         self.add_room_object(self.AstroCollection)
         self.AstroText = AstroText(self,150,Globals.SCREEN_HEIGHT-100)
         self.add_room_object(self.AstroText)
+
 
 
         #Load sound files

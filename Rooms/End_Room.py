@@ -19,4 +19,5 @@ class End_Room(Level):
 
         Globals.astro_count = 0
         Globals.SCORE = 0
+        Globals.LIVES = 3
         Globals.active_shield = False

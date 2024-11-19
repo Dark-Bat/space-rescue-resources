@@ -56,9 +56,9 @@ class ExtraHeart(RoomObject):
     # A class for giving the player an extra heart, has similar function to repair kit but can go to a higher amount of total hearts
     def __init__(self, room, x, y):
         RoomObject.__init__(self,room, x, y)
-        image = self.load_image("Lives_frames/Lives_1.png")
+        image = self.load_image("extra_heart.png")
         #Sets image for the object
-        self.set_image(image, 125,23)
+        self.set_image(image, 23,23)
         self.set_direction(180,20)
         self.register_collision_object("Ship")
 
